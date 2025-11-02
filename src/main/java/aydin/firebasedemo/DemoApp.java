@@ -35,10 +35,12 @@ public class DemoApp extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
+        // Initialize Firestore and FirebaseAuth
         fstore = contxtFirebase.firebase();
         fauth = FirebaseAuth.getInstance();
 
-        scene = new Scene(loadFXML("primary"), 640, 480);
+        // Load welcome.fxml as the initial scene (welcome screen)
+        scene = new Scene(loadFXML("welcome"), 640, 480);
         stage.setScene(scene);
         stage.show();
     }

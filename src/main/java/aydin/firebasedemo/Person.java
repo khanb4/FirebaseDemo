@@ -3,10 +3,18 @@ package aydin.firebasedemo;
 public class Person {
     private String name;
     private int age;
+    String phoneNumber;
 
     public Person(String name, int age) {
         this.name = name;
         this.age = age;
+        this.phoneNumber = phoneNumber;
+    }
+
+    public Person(String name, int age, String phoneNumber) {
+        this.name = name;
+        this.age = age;
+        this.phoneNumber = phoneNumber;
     }
 
     public String getName() {
@@ -26,4 +34,15 @@ public class Person {
         this.age = age;
     }
 
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    @Override
+    public String toString() {
+        return name + " (" + age + ") - " + phoneNumber;
+    }
 }

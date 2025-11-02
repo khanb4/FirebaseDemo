@@ -27,6 +27,9 @@ public class PrimaryController {
     private TextField ageTextField;
 
     @FXML
+    private TextField phoneTextField;
+
+    @FXML
     private TextField nameTextField;
 
     @FXML
@@ -97,11 +100,17 @@ public class PrimaryController {
                 listOfUsers.clear();
                 for (QueryDocumentSnapshot document : documents)
                 {
-                    outputTextArea.setText(outputTextArea.getText()+ document.getData().get("Name")+ " , Age: "+
-                            document.getData().get("Age")+ " \n ");
+                    outputTextArea.setText(outputTextArea.getText()
+                            + document.getData().get("Name")
+                            + " , Age: " + document.getData().get("Age")
+                            + " , Phone: " + document.getData().getOrDefault("Phone", "N/A")
+                            + "\n");
                     System.out.println(document.getId() + " => " + document.getData().get("Name"));
-                    person  = new Person(String.valueOf(document.getData().get("Name")),
-                            Integer.parseInt(document.getData().get("Age").toString()));
+                    person = new Person(
+                            String.valueOf(document.getData().get("Name")),
+                            Integer.parseInt(document.getData().get("Age").toString()),
+                            String.valueOf(document.getData().getOrDefault("Phone", "N/A"))
+                    );
                     listOfUsers.add(person);
                 }
             }
@@ -150,6 +159,7 @@ public class PrimaryController {
         Map<String, Object> data = new HashMap<>();
         data.put("Name", nameTextField.getText());
         data.put("Age", Integer.parseInt(ageTextField.getText()));
+        data.put("Phone", phoneTextField.getText());
 
         //asynchronously write data
         ApiFuture<WriteResult> result = docRef.set(data);
